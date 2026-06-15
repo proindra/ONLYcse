@@ -393,16 +393,33 @@ a:hover { color: var(--secondary-color); }
    ============================================ */
 
 .hero {
-  margin-top: 80px;
-  padding: 60px 0;
+  margin-top: 0;
+  padding-top: calc(80px + 60px);
   min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background-color: #f8fafc;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(99,102,241,0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(139,92,246,0.10) 0%, transparent 50%),
+    radial-gradient(circle at 55% 10%, rgba(236,72,153,0.07) 0%, transparent 40%),
+    radial-gradient(rgba(99,102,241,0.15) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 28px 28px;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
 }
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, #f8fafc 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-container { position: relative; z-index: 2; }
 
 .hero-container {
   width: 100%;
@@ -489,13 +506,34 @@ a:hover { color: var(--secondary-color); }
    FEATURES SECTION
    ============================================ */
 
-.features { padding: 80px 0; background-color: var(--light-bg); }
+.features {
+  padding: 80px 0;
+  background-color: var(--light-bg);
+  background-image: radial-gradient(rgba(99,102,241,0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
 
 .section-title {
   text-align: center;
   margin-bottom: 4rem;
   font-size: 2.5rem;
   color: var(--dark-bg);
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  margin: 0.5rem auto 0;
+  width: 60px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color), var(--secondary-color));
+  background-size: 200% auto;
+  animation: gradientShift 3s linear infinite;
 }
 
 .community .section-title { color: #ffffff; }
@@ -513,7 +551,22 @@ a:hover { color: var(--secondary-color); }
   box-shadow: var(--shadow-md);
   transition: var(--transition);
   border-top: 4px solid transparent;
+  position: relative;
+  overflow: hidden;
 }
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(99,102,241,0.15), transparent 70%);
+  border-radius: 50%;
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+.feature-card:hover::before { top: -10%; left: -10%; width: 160px; height: 160px; }
 .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); border-top-color: var(--primary-color); }
 
 .icon-box {
@@ -546,7 +599,14 @@ a:hover { color: var(--secondary-color); }
    INTERNSHIPS & JOBS SECTION
    ============================================ */
 
-.internships { padding: 80px 0; background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%); }
+.internships {
+  padding: 80px 0;
+  background: #ffffff;
+  background-image:
+    linear-gradient(rgba(99,102,241,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,102,241,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
 
 .platforms-grid {
   display: grid;
@@ -592,7 +652,18 @@ a:hover { color: var(--secondary-color); }
 
 .platform-arrow { color: var(--primary-color); font-size: 0.85rem; transition: var(--transition); }
 
-html[data-theme="dark"] .internships { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); }
+html[data-theme="dark"] .hero {
+  background-color: #0f172a;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(99,102,241,0.18) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(139,92,246,0.15) 0%, transparent 50%),
+    radial-gradient(rgba(99,102,241,0.12) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 28px 28px;
+}
+html[data-theme="dark"] .hero::before { background: linear-gradient(180deg, transparent 60%, #0f172a 100%); }
+html[data-theme="dark"] .features { background-image: radial-gradient(rgba(99,102,241,0.1) 1px, transparent 1px); background-size: 32px 32px; }
+html[data-theme="dark"] .internships { background: #0f172a; background-image: linear-gradient(rgba(99,102,241,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.08) 1px, transparent 1px); background-size: 40px 40px; }
+html[data-theme="dark"] .contests { background-image: linear-gradient(rgba(99,102,241,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.07) 1px, transparent 1px); background-size: 36px 36px; }
 html[data-theme="dark"] .platform-card { background: #1e293b; border-color: #334155; }
 html[data-theme="dark"] .platform-info h3 { color: #f1f5f9; }
 
@@ -600,7 +671,12 @@ html[data-theme="dark"] .platform-info h3 { color: #f1f5f9; }
    LEARNING SECTION
    ============================================ */
 
-.learning { padding: 80px 0; background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%); }
+.learning {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  background-image: radial-gradient(rgba(139,92,246,0.08) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
 
 .learning-grid {
   display: grid;
@@ -650,7 +726,14 @@ html[data-theme="dark"] .platform-info h3 { color: #f1f5f9; }
    CONTESTS SECTION
    ============================================ */
 
-.contests { padding: 80px 0; background-color: var(--light-bg); }
+.contests {
+  padding: 80px 0;
+  background-color: var(--light-bg);
+  background-image:
+    linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
 
 .contests-list { display: flex; flex-direction: column; gap: 2rem; }
 
@@ -689,7 +772,12 @@ html[data-theme="dark"] .platform-info h3 { color: #f1f5f9; }
    EVENTS SECTION
    ============================================ */
 
-.events { padding: 80px 0; background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%); }
+.events {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  background-image: radial-gradient(rgba(236,72,153,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
 
 .events-grid {
   display: grid;
@@ -850,7 +938,7 @@ html[data-theme="dark"] .platform-info h3 { color: #f1f5f9; }
 
   .section-title { font-size: 2rem; }
 
-  .hero { margin-top: 60px; padding: 40px 0 20px; min-height: auto; }
+  .hero { margin-top: 0; padding-top: calc(60px + 40px); padding-bottom: 20px; min-height: auto; }
   .hero-container { grid-template-columns: 1fr; gap: 1.5rem; }
   .hero-content { order: 1; text-align: center; }
   .hero-content h2 { font-size: 1.75rem; }
