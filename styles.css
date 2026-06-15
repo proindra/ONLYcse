@@ -395,8 +395,12 @@ a:hover { color: var(--secondary-color); }
 .hero {
   margin-top: 0;
   padding-top: calc(80px + 60px);
+  height: 100vh;
+  height: 100dvh;
   min-height: 100vh;
+  min-height: 100dvh;
   max-height: 100vh;
+  max-height: 100dvh;
   overflow: hidden;
   display: flex;
   align-items: center;
