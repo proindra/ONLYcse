@@ -395,7 +395,9 @@ a:hover { color: var(--secondary-color); }
 .hero {
   margin-top: 0;
   padding-top: calc(80px + 60px);
-  min-height: 90vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -938,7 +940,7 @@ html[data-theme="dark"] .platform-info h3 { color: #f1f5f9; }
 
   .section-title { font-size: 2rem; }
 
-  .hero { margin-top: 0; padding-top: calc(60px + 40px); padding-bottom: 20px; min-height: auto; }
+  .hero { margin-top: 0; padding-top: calc(60px + 40px); padding-bottom: 20px; min-height: 100vh; max-height: 100vh; overflow: hidden; }
   .hero-container { grid-template-columns: 1fr; gap: 1.5rem; }
   .hero-content { order: 1; text-align: center; }
   .hero-content h2 { font-size: 1.75rem; }
